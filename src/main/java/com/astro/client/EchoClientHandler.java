@@ -1,7 +1,8 @@
-package com.astro.demo1;
+package com.astro.client;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
@@ -9,6 +10,7 @@ import io.netty.util.CharsetUtil;
 /**
  * Created by astro on 2018/7/22.
  */
+@ChannelHandler.Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf>{
 
     @Override
