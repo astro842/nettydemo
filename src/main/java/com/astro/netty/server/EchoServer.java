@@ -15,22 +15,14 @@ import java.net.InetSocketAddress;
  */
 public class EchoServer {
 
-    private final int port;
+    private  int port;
 
     public EchoServer(int port) {
         this.port = port;
     }
 
-    public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
-            System.err.println("Usage:" + EchoServer.class.getSimpleName() + "<port>");
-            return;
-        }
-        int port = Integer.parseInt(args[0]);
-        new EchoServer(port).start();
-    }
-
     public void start() throws Exception {
+        System.out.println("进入start()");
         final EchoServerHandler serverHandler = new EchoServerHandler();
         EventLoopGroup group = new NioEventLoopGroup();
         try {
@@ -52,4 +44,16 @@ public class EchoServer {
     }
 
 
+    public static void main(String[] args) throws Exception {
+//        if (args.length != 1) {
+//            System.err.println("Usage:" + EchoServer.class.getSimpleName() + "<port>");
+//            System.out.println("Usage:" + EchoServer.class.getSimpleName() + "<port>");
+//            return;
+//        }
+        //int port = Integer.parseInt(args[0]);
+        int port = 8888;
+        EchoServer es = new EchoServer(port);
+        es.start();
+
+    }
 }

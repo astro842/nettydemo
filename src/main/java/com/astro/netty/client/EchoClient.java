@@ -6,9 +6,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
-
-import java.net.InetSocketAddress;
+import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
  * Created by astro on 2018/7/22.
@@ -26,14 +24,15 @@ public class EchoClient {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
-            b.group(group).channel(NioServerSocketChannel.class).remoteAddress(new InetSocketAddress(host, port))
+            b.group(group)
+                    .channel(NioSocketChannel.class)
                     .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new EchoClientHandler());
+                        @Override protected void initChannel(SocketChannel ch) {
+                            ch.pipeline()
+                                    .addLast(new EchoClientHandler());
                         }
                     });
-            ChannelFuture f = b.connect().sync();
+            ChannelFuture f = b.connect(host,port).sync();
             f.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();
@@ -41,13 +40,7 @@ public class EchoClient {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
-            System.err.println("Usage:" + EchoClient.class.getSimpleName() + "<host><port>");
-            return;
-        }
-        String host = args[0];
-        int port = Integer.parseInt(args[1]);
-        new EchoClient(host,port).start();
+        new EchoClient("127.0.0.1", 8888).start();
 
     }
 }
