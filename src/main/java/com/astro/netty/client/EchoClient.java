@@ -1,4 +1,4 @@
-package com.astro.client;
+package com.astro.netty.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
