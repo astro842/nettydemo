@@ -10,13 +10,13 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @version v
  * @date 2018/7/26
  */
-public class ServerHandler  extends ChannelInboundHandlerAdapter {
+public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
         //do something msg
-        ByteBuf buf = (ByteBuf)msg;
+        ByteBuf buf = (ByteBuf) msg;
         byte[] data = new byte[buf.readableBytes()];
         buf.readBytes(data);
         String request = new String(data, "utf-8");
@@ -25,7 +25,6 @@ public class ServerHandler  extends ChannelInboundHandlerAdapter {
         String response = "我是反馈的信息";
         ctx.writeAndFlush(Unpooled.copiedBuffer("888".getBytes()));
         //.addListener(ChannelFutureListener.CLOSE);
-
 
     }
 

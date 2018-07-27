@@ -40,11 +40,12 @@ public class Client {
                                 .addLast(new ClientHandler());
                     }
                 });
-        ChannelFuture future = bootstrap.connect(host,port).sync();
-        future.channel().writeAndFlush(Unpooled.copiedBuffer("777".getBytes()));
+        ChannelFuture future = bootstrap.connect(host, port).sync();
+        future.channel().writeAndFlush(Unpooled.copiedBuffer("client 发信息".getBytes()));
         future.channel().closeFuture().sync();
         workerGroup.shutdownGracefully();
     }
+
     public static void main(String[] args) throws Exception {
         new Client("127.0.0.1", 8888).start();
     }
