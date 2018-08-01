@@ -1,4 +1,4 @@
-package com.astro.Netty4;
+package com.astro.Easy;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -10,8 +10,8 @@ import io.netty.util.concurrent.GenericFutureListener;
 
 /**
  * @author lyh
- * @date 2018/7/30 
  * @version v
+ * @date 2018/7/30
  */
 
 public class NettyServer {
@@ -22,7 +22,7 @@ public class NettyServer {
      * 最后调用bind(8888)
      *
      */
-    private static int PORT = 8000;
+    private static int PORT = 1000;
 
     public static void main(String[] args) {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -38,8 +38,8 @@ public class NettyServer {
 
                     }
                 });
-        // ChannelFuture bind = bootstrap.bind(8888);
-        bind(bootstrap, PORT);
+        bootstrap.bind(8888);
+        //bind(bootstrap, PORT);
     }
 
     private static void bind(ServerBootstrap bootstrap, int port) {
@@ -50,6 +50,7 @@ public class NettyServer {
                     System.out.println("端口" + port + "绑定成功");
                 } else {
                     System.err.println("端口" + port + "绑定失败");
+                    Thread.sleep(200);
                     bind(bootstrap, port + 1);
                 }
             }
