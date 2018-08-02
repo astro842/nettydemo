@@ -1,4 +1,4 @@
-package com.astro.netty2.client;
+package com.astro.Demo.netty2.client;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -11,7 +11,7 @@ import io.netty.util.ReferenceCountUtil;
  * @date 2018/7/26
  */
 
-public class ClientHandler extends ChannelInboundHandlerAdapter{
+public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

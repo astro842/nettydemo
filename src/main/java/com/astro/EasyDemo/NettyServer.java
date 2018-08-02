@@ -1,4 +1,4 @@
-package com.astro.Easy;
+package com.astro.EasyDemo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;

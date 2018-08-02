@@ -1,4 +1,4 @@
-package com.astro.netty2.server;
+package com.astro.Demo.netty2.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

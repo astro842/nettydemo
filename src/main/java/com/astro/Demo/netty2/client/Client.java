@@ -1,4 +1,4 @@
-package com.astro.netty2.client;
+package com.astro.Demo.netty2.client;
 
 
 import io.netty.bootstrap.Bootstrap;
