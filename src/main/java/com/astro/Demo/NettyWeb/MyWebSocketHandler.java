@@ -69,13 +69,38 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     //        }
     //    }
 
+    //服务端处理客户端websocket请求的核心方法
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         //处理客户端向服务端发起http握手请求的业务
         if (msg instanceof FullHttpRequest) {
+            System.out.println("-------------->-------------->处理客户端向服务端发起http握手请求的业务");
             handHttpRequest(ctx, (FullHttpRequest) msg);
-        } else if (msg instanceof WebSocketFrame) { //处理websocket连接业务
+        } else if (msg instanceof WebSocketFrame) {
+            //处理websocket连接业务
+            System.out.println("-------------->-------------->处理websocket连接业务");
             handWebsocketFrame(ctx, (WebSocketFrame) msg);
+        }
+    }
+
+
+    /**
+     * 处理客户端向服务端发起http握手请求的业务
+     */
+    private void handHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
+        if (!req.getDecoderResult().isSuccess()
+                || !("websocket".equals(req.headers().get("Upgrade")))) {
+            sendHttpResponse(ctx, req,
+                    new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
+            return;
+        }
+        WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
+                WEB_SOCKET_URL, null, false);
+        handshaker = wsFactory.newHandshaker(req);
+        if (handshaker == null) {
+            WebSocketServerHandshakerFactory.sendUnsupportedWebSocketVersionResponse(ctx.channel());
+        } else {
+            handshaker.handshake(ctx.channel(), req);
         }
     }
 
@@ -110,25 +135,6 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         NettyConfig.group.writeAndFlush(tws);
     }
 
-    /**
-     * 处理客户端向服务端发起http握手请求的业务
-     */
-    private void handHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
-        if (!req.getDecoderResult().isSuccess()
-                || !("websocket".equals(req.headers().get("Upgrade")))) {
-            sendHttpResponse(ctx, req,
-                    new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
-            return;
-        }
-        WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
-                WEB_SOCKET_URL, null, false);
-        handshaker = wsFactory.newHandshaker(req);
-        if (handshaker == null) {
-            WebSocketServerHandshakerFactory.sendUnsupportedWebSocketVersionResponse(ctx.channel());
-        } else {
-            handshaker.handshake(ctx.channel(), req);
-        }
-    }
 
     /**
      * 服务端向客户端响应消息

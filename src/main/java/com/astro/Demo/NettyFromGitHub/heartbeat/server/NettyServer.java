@@ -28,8 +28,8 @@ public class NettyServer {
         ServerBootstrap b = new ServerBootstrap();
         try {
             b.group(group)
-                    .channel(NioServerSocketChannel.class)
-                    .childHandler(new NettyServerFilter()); //设置过滤器
+                    .channel(NioServerSocketChannel.class);
+            //.childHandler(new NettyServerFilter()); //设置过滤器
             // 服务器绑定端口监听
             ChannelFuture f = b.bind(port).sync();
             System.out.println("服务端启动成功,端口是:" + port);
