@@ -18,7 +18,7 @@ import io.netty.handler.timeout.IdleStateHandler;
  * @date 2017年10月8日
  */
 
-public class NettyServerFilter extends ChannelInitializer<SocketChannel> {
+public class NettyServerFilter2 extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
@@ -30,6 +30,6 @@ public class NettyServerFilter extends ChannelInitializer<SocketChannel> {
         ph.addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
         ph.addLast("decoder", new StringDecoder());
         ph.addLast("encoder", new StringEncoder());
-        ph.addLast("handler", new NettyServerHandler());// 服务端业务逻辑
+        ph.addLast("handler", new NettyServerHandler2());// 服务端业务逻辑
     }
 }

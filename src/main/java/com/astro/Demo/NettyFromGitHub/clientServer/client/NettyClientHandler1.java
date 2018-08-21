@@ -12,7 +12,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @author pancm
  * @date 2017-8-31
  */
-public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
+public class NettyClientHandler1 extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {

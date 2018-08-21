@@ -14,7 +14,7 @@ import io.netty.util.concurrent.GenericFutureListener;
  * @date 2018/7/30
  */
 
-public class NettyServer {
+public class EasyNettyServer {
 
     /*
      * Netty 服务器启动（指定配置3个个属性）

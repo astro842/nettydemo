@@ -18,7 +18,7 @@ import io.netty.util.CharsetUtil;
  * @author pancm
  * @date 2017年10月8日
  */
-public class NettyClientHandler extends ChannelInboundHandlerAdapter {
+public class NettyClientHandler2 extends ChannelInboundHandlerAdapter {
     /**
      * 客户端请求的心跳命令
      */

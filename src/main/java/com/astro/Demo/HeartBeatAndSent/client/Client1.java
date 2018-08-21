@@ -24,11 +24,11 @@ import io.netty.handler.timeout.IdleStateHandler;
  */
 
 
-public class Client {
+public class Client1 {
 
 
     public static void main(String[] args) {
-        ClientHandler clientHandler = new ClientHandler(1);
+        ClientHandler1 clientHandler = new ClientHandler1(1);
         EventLoopGroup group = new NioEventLoopGroup();
         Bootstrap b = new Bootstrap();
         b.group(group)

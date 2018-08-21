@@ -12,7 +12,7 @@ import io.netty.handler.timeout.IdleStateEvent;
  */
 
 
-public class ServerHandler extends ChannelInboundHandlerAdapter {
+public class ServerHandler1 extends ChannelInboundHandlerAdapter {
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {

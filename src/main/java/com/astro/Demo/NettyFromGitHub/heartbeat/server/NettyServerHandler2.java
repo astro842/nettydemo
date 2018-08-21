@@ -15,7 +15,7 @@ import io.netty.handler.timeout.IdleStateEvent;
  * @author pancm
  * @date 2017年10月8日
  */
-public class NettyServerHandler extends ChannelInboundHandlerAdapter {
+public class NettyServerHandler2 extends ChannelInboundHandlerAdapter {
 
     /**
      * 空闲次数

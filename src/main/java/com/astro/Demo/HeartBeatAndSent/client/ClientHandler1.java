@@ -12,7 +12,7 @@ import io.netty.handler.timeout.IdleStateEvent;
  */
 
 
-public class ClientHandler extends ChannelInboundHandlerAdapter {
+public class ClientHandler1 extends ChannelInboundHandlerAdapter {
 
 
     @Override
@@ -36,7 +36,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         // idle_count = 0;
     }
 
-    public ClientHandler(int idle_count) {
+    public ClientHandler1(int idle_count) {
         this.idle_count = idle_count;
     }
     //心跳

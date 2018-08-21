@@ -1,4 +1,4 @@
-package com.astro.Demo.NettyFromGitHub.clientServer.client;
+package com.astro.Demo.NettyFromGitHub.clientServer.server;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -7,25 +7,24 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 /**
- * Title: NettyClientFilter
+ * Title: NettyServerFilter
  * Description:
- * Netty客户端 过滤器
+ * Netty 服务端过滤器
  * Version:1.0.0
  *
  * @author pancm
  * @date 2017-8-31
  */
-public class NettyClientFilter extends ChannelInitializer<SocketChannel> {
+public class NettyServerFilter1 extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline ph = ch.pipeline();
-        /*
-         * 解码和编码，应和服务端一致
-         * */
-        // ph.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
+        // 以("\n")为结尾分割的 解码器
+        //ph.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
+        // 解码和编码，应和客户端一致
         ph.addLast("decoder", new StringDecoder());
         ph.addLast("encoder", new StringEncoder());
-        ph.addLast("handler", new NettyClientHandler()); //客户端的逻辑
+        ph.addLast("handler", new NettyServerHandler1());// 服务端业务逻辑
     }
 }

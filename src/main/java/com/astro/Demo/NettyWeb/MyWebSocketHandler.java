@@ -72,6 +72,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     //服务端处理客户端websocket请求的核心方法
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
+        //连接
         //处理客户端向服务端发起http握手请求的业务
         if (msg instanceof FullHttpRequest) {
             System.out.println("-------------->-------------->处理客户端向服务端发起http握手请求的业务");
@@ -88,10 +89,8 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
      * 处理客户端向服务端发起http握手请求的业务
      */
     private void handHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
-        if (!req.getDecoderResult().isSuccess()
-                || !("websocket".equals(req.headers().get("Upgrade")))) {
-            sendHttpResponse(ctx, req,
-                    new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
+        if (!req.getDecoderResult().isSuccess() || !("websocket".equals(req.headers().get("Upgrade")))) {
+            sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
             return;
         }
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
@@ -117,7 +116,6 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
             ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
             return;
         }
-
         //判断是否是二进制消息，如果是二进制消息，抛出异常
         if (!(frame instanceof TextWebSocketFrame)) {
             System.out.println("目前我们不支持二进制消息");

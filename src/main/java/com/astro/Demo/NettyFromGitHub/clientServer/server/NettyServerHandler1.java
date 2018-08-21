@@ -15,7 +15,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @author pancm
  * @date 2017-8-31
  */
-public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
+public class NettyServerHandler1 extends SimpleChannelInboundHandler<String> {
 
     /*
      * 建立连接时，返回消息

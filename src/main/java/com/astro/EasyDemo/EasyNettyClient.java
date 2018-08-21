@@ -16,7 +16,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  */
 
 
-public class NettyClient {
+public class EasyNettyClient {
 
 
     public static void main(String[] args) throws InterruptedException {

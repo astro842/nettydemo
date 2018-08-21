@@ -22,7 +22,7 @@ import io.netty.handler.timeout.IdleStateHandler;
  */
 
 
-public class Server {
+public class Server1 {
 
     public static void main(String[] args) throws InterruptedException {
         EventLoopGroup boss = new NioEventLoopGroup();
@@ -39,7 +39,7 @@ public class Server {
                         p.addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
                         p.addLast("decoder", new StringDecoder());
                         p.addLast("encoder", new StringEncoder());
-                        p.addLast("handler", new ServerHandler());
+                        p.addLast("handler", new ServerHandler1());
                     }
                 });
         System.out.println("服务端 启动");
