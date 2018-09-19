@@ -97,7 +97,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
                 WEB_SOCKET_URL, null, false);
         handshaker = wsFactory.newHandshaker(req);
         if (handshaker == null) {
-            WebSocketServerHandshakerFactory.sendUnsupportedWebSocketVersionResponse(ctx.channel());
+            WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
         } else {
             handshaker.handshake(ctx.channel(), req);
         }
@@ -139,14 +139,14 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
      */
     private void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req,
             DefaultFullHttpResponse res) {
-        if (res.getStatus().code() != 200) {
-            ByteBuf buf = Unpooled.copiedBuffer(res.getStatus().toString(), CharsetUtil.UTF_8);
+        if (res.status().code() != 200) {
+            ByteBuf buf = Unpooled.copiedBuffer(res.status().toString(), CharsetUtil.UTF_8);
             res.content().writeBytes(buf);
             buf.release();
         }
         //服务端向客户端发送数据
         ChannelFuture f = ctx.channel().writeAndFlush(res);
-        if (res.getStatus().code() != 200) {
+        if (res.status().code() != 200) {
             f.addListener(ChannelFutureListener.CLOSE);
         }
     }
