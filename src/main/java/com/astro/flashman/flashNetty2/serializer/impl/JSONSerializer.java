@@ -1,6 +1,8 @@
-package com.astro.flashman.flashNetty2.protocol;
+package com.astro.flashman.flashNetty2.serializer.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.astro.flashman.flashNetty2.serializer.Serializer;
+import com.astro.flashman.flashNetty2.serializer.SerializerAlogrithm;
 
 /**
  * @author lyh

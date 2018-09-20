@@ -1,4 +1,4 @@
-package com.astro.flashman.flashNetty2;
+package com.astro.flashman.flashNetty2.flashserver;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;

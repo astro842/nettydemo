@@ -1,4 +1,6 @@
-package com.astro.flashman.flashNetty2.protocol;
+package com.astro.flashman.flashNetty2.serializer;
+
+import com.astro.flashman.flashNetty2.serializer.impl.JSONSerializer;
 
 /**
  * @author lyh

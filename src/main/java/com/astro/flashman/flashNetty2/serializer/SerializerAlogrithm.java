@@ -1,4 +1,4 @@
-package com.astro.flashman.flashNetty2.protocol;
+package com.astro.flashman.flashNetty2.serializer;
 
 /**
  * @author lyh
