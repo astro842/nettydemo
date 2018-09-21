@@ -68,6 +68,23 @@ public class PacketCodeC {
         return buf;
     }
 
+
+    //编码
+    public void encode1(ByteBuf buf, Packet packet) {
+        //2.序列化Java对象
+        byte[] bytes = Serializer.DEFAULT.serialize(packet);
+
+        //3.实际编码过程
+        //协议 (魔数4 版本号1 序列化算法1 指令1 数据长度4 数据n)
+        buf.writeInt(MAGIC_NUMBER);
+        buf.writeByte(packet.getVersion());
+        buf.writeByte(Serializer.DEFAULT.getSerializerAlogrithm());
+        buf.writeByte(packet.getCommand());
+        buf.writeInt(bytes.length);
+        buf.writeBytes(bytes);
+
+    }
+
     //解码
     //协议 (魔数4 版本号1 序列化算法1 指令1 数据长度4 数据n)
     public Packet decode(ByteBuf byteBuf) {

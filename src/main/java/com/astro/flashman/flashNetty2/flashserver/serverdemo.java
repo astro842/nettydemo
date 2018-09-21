@@ -1,5 +1,10 @@
 package com.astro.flashman.flashNetty2.flashserver;
 
+import com.astro.flashman.flashNetty2.codes.PacketDecoder;
+import com.astro.flashman.flashNetty2.codes.PacketEncoder;
+import com.astro.flashman.flashNetty2.flashserver.handler.LoginRequestHandler;
+import com.astro.flashman.flashNetty2.flashserver.handler.MessageRequestHandler;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -26,7 +31,11 @@ public class serverdemo {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new SecondServerHandler());
+                        // ch.pipeline().addLast(new SecondServerHandler());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(new MessageRequestHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
         bind(boot, 8001);

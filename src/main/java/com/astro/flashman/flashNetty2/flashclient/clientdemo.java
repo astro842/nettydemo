@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import com.astro.flashman.flashNetty2.codes.PacketDecoder;
+import com.astro.flashman.flashNetty2.codes.PacketEncoder;
+import com.astro.flashman.flashNetty2.flashclient.handler.LoginResponeHandler;
+import com.astro.flashman.flashNetty2.flashclient.handler.MessageResponseHandler;
 import com.astro.flashman.flashNetty2.protocol.PacketCodeC;
 import com.astro.flashman.flashNetty2.protocol.request.MessageRequestPacket;
 import com.astro.flashman.flashNetty2.util.LoginUtil;
@@ -38,7 +42,11 @@ public class clientdemo {
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new SecondClientHandler());
+                        //ch.pipeline().addLast(new SecondClientHandler());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginResponeHandler());
+                        ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
 
@@ -70,7 +78,7 @@ public class clientdemo {
         new Thread(() -> {
             while (!Thread.interrupted()) {
                 if (LoginUtil.hasLogin(channel)) {
-                    System.out.println("------》输入信息发送到服务端：");
+                    System.out.println("------》" + Thread.currentThread().getName() + "--输入信息发送到服务端：");
                     Scanner sc = new Scanner(System.in);
                     String str = sc.nextLine();
                     if (str.isEmpty()) {
